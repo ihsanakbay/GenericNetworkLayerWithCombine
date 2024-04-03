@@ -18,6 +18,7 @@ final class ViewModel {
     func createPost() {
         NetworkClient.dispatch(NetworkRouter.createPost(body: request))
             .sink { [weak self] completion in
+                guard let self else { return }
                 switch completion {
                 case .finished:
                     print("Post created successfully")
@@ -35,6 +36,7 @@ final class ViewModel {
     func fetchPosts() {
         NetworkClient.dispatch(NetworkRouter.fetchPosts())
             .sink { [weak self] completion in
+                guard let self else { return }
                 switch completion {
                 case .finished:
                     print("Fetched posts successfully")
